@@ -5,7 +5,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Jerome Haltom</Authors>
     <Description>Various utilities and extensions for ASP.Net Core.</Description>
-    <PackageProjectUrl>https://github.com/wasabii/Cogito.ServiceFabric</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/wasabii/Cogito.AspNetCore</PackageProjectUrl>
     <PackageIconUrl>https://cloverluxussc.blob.core.windows.net/public/cogito-nuget-icon.png</PackageIconUrl>
   </PropertyGroup>
 
