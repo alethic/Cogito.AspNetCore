@@ -47,7 +47,7 @@ namespace Cogito.AspNetCore.Autofac
         /// <param name="builder"></param>
         /// <param name="scope"></param>
         /// <returns></returns>
-        public static IWebHostBuilder UseLifetimeScopeStartup<TStartup>(this IWebHostBuilder builder, ILifetimeScope scope)
+        public static IWebHostBuilder UseStartup<TStartup>(this IWebHostBuilder builder, ILifetimeScope scope)
             where TStartup : class
         {
             if (builder == null)
