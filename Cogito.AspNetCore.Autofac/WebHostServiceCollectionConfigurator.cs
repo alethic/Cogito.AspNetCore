@@ -3,6 +3,7 @@
 using Autofac;
 
 using Cogito.Autofac;
+using Cogito.Autofac.DependencyInjection;
 
 using Microsoft.AspNetCore.Hosting;
 
