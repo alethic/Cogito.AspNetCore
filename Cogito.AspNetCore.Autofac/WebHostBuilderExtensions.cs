@@ -15,7 +15,7 @@ namespace Cogito.AspNetCore.Autofac
         const string CONFIGURED_FLAG = "Cogito.AspNetCore.Autofac:Configured";
 
         /// <summary>
-        /// Configures the <see cref="IWebHostBuilder"/> in accordance with the components framework.
+        /// Configures the <see cref="IWebHostBuilder"/> to use the given <see cref="ILifetimeScope"/> for resolution.
         /// </summary>
         /// <param name="builder"></param>
         /// <param name="scope"></param>
@@ -42,8 +42,10 @@ namespace Cogito.AspNetCore.Autofac
         }
 
         /// <summary>
-        /// Configures the <see cref="IWebHostBuilder"/> in accordance with the components framework.
+        /// Configures the <see cref="IWebHostBuilder"/> to use the given <see cref="ILifetimeScope"/> for resolution,
+        /// and to resolve the specified <typeparamref name="TStartup"/> instance from that scope.
         /// </summary>
+        /// <typeparam name="TStartup"></typeparam>
         /// <param name="builder"></param>
         /// <param name="scope"></param>
         /// <returns></returns>
