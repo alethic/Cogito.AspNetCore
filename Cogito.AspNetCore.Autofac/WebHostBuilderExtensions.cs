@@ -20,7 +20,7 @@ namespace Cogito.AspNetCore.Autofac
         /// <param name="builder"></param>
         /// <param name="scope"></param>
         /// <returns></returns>
-        public static IWebHostBuilder ConfigureComponents(this IWebHostBuilder builder, ILifetimeScope scope)
+        public static IWebHostBuilder UseLifetimeScope(this IWebHostBuilder builder, ILifetimeScope scope)
         {
             if (builder == null)
                 throw new ArgumentNullException(nameof(builder));
@@ -47,7 +47,7 @@ namespace Cogito.AspNetCore.Autofac
         /// <param name="builder"></param>
         /// <param name="scope"></param>
         /// <returns></returns>
-        public static IWebHostBuilder ConfigureComponents<TStartup>(this IWebHostBuilder builder, ILifetimeScope scope)
+        public static IWebHostBuilder UseLifetimeScopeStartup<TStartup>(this IWebHostBuilder builder, ILifetimeScope scope)
             where TStartup : class
         {
             if (builder == null)
@@ -56,7 +56,7 @@ namespace Cogito.AspNetCore.Autofac
                 throw new ArgumentNullException(nameof(scope));
 
             return builder
-                .ConfigureComponents(scope)
+                .UseLifetimeScope(scope)
                 .ConfigureServices(s => s.AddTransient(provider => scope.Resolve<TStartup>()))
                 .UseStartup<TStartup>();
         }
