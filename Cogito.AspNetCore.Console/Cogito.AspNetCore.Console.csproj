@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <ApplicationIcon />
+    <OutputType>Exe</OutputType>
+    <StartupObject />
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <LangVersion>7.2</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <LangVersion>7.2</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.8.1" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.2.2" />
+    <PackageReference Include="Cogito.Extensions.Logging.Autofac" Version="0.1.0-unstable0005" />
+    <PackageReference Include="Cogito.Extensions.Logging.Serilog.Autofac" Version="0.1.0-unstable0005" />
+    <PackageReference Include="Cogito.Serilog.Autofac" Version="0.1.0-unstable0002" />
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Cogito.AspNetCore.Autofac\Cogito.AspNetCore.Autofac.csproj" />
+    <ProjectReference Include="..\Cogito.AspNetCore\Cogito.AspNetCore.csproj" />
+  </ItemGroup>
+
+</Project>

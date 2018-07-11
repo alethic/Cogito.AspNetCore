@@ -12,6 +12,7 @@ namespace Cogito.AspNetCore.Autofac
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterFromAttributes(typeof(AssemblyModule).Assembly);
+            builder.RegisterType(WebHostLogger.ImplementationType).As(WebHostLogger.InterfaceType);
         }
 
     }

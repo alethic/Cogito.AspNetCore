@@ -15,20 +15,20 @@ namespace Cogito.AspNetCore.Autofac
         IWebHostBuilderConfigurator
     {
 
-        readonly ILifetimeScope scope;
+        readonly IComponentContext context;
 
         /// <summary>
         /// Initializes a new instance.
         /// </summary>
-        /// <param name="scope"></param>
-        public WebHostServiceCollectionConfigurator(ILifetimeScope scope)
+        /// <param name="context"></param>
+        public WebHostServiceCollectionConfigurator(IComponentContext context)
         {
-            this.scope = scope ?? throw new ArgumentNullException(nameof(scope));
+            this.context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
         public IWebHostBuilder Apply(IWebHostBuilder builder)
         {
-            return builder.ConfigureServices(s => s.Configure(scope));
+            return builder.ConfigureServices(s => s.Configure(context.Resolve<ILifetimeScope>()));
         }
 
     }

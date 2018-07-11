@@ -18,19 +18,20 @@ namespace Cogito.AspNetCore.Autofac
         /// Configures the <see cref="IWebHostBuilder"/> to use the given <see cref="ILifetimeScope"/> for resolution.
         /// </summary>
         /// <param name="builder"></param>
-        /// <param name="scope"></param>
+        /// <param name="context"></param>
         /// <returns></returns>
-        public static IWebHostBuilder UseLifetimeScope(this IWebHostBuilder builder, ILifetimeScope scope)
+        public static IWebHostBuilder UseComponentContext(this IWebHostBuilder builder, IComponentContext context)
         {
             if (builder == null)
                 throw new ArgumentNullException(nameof(builder));
-            if (scope == null)
-                throw new ArgumentNullException(nameof(scope));
+            if (context == null)
+                throw new ArgumentNullException(nameof(context));
 
             // prevent double configuration
             if (!bool.TryParse(builder.GetSetting(CONFIGURED_FLAG), out var value) || !value)
             {
-                foreach (var i in scope.Resolve<IOrderedEnumerable<IWebHostBuilderConfiguratorProvider>>())
+                // apply any registered configuration
+                foreach (var i in context.Resolve<IOrderedEnumerable<IWebHostBuilderConfiguratorProvider>>())
                     foreach (var j in i.GetConfigurators())
                         builder = j.Apply(builder);
 
@@ -58,7 +59,7 @@ namespace Cogito.AspNetCore.Autofac
                 throw new ArgumentNullException(nameof(scope));
 
             return builder
-                .UseLifetimeScope(scope)
+                .UseComponentContext(scope)
                 .ConfigureServices(s => s.AddTransient(provider => scope.Resolve<TStartup>()))
                 .UseStartup<TStartup>();
         }
