@@ -11,8 +11,8 @@
 
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.8.1" />
-    <PackageReference Include="Cogito.Autofac" Version="0.1.0-unstable0007" />
-    <PackageReference Include="Cogito.Autofac.DependencyInjection" Version="0.1.0-unstable0007" />
+    <PackageReference Include="Cogito.Autofac" Version="0.1.0-unstable0009" />
+    <PackageReference Include="Cogito.Autofac.DependencyInjection" Version="0.1.0-unstable0009" />
     <PackageReference Include="Microsoft.AspNetCore" Version="2.1.2" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="2.1.1" />
   </ItemGroup>

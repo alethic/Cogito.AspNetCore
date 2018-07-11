@@ -18,9 +18,9 @@
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.8.1" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.2.2" />
-    <PackageReference Include="Cogito.Extensions.Logging.Autofac" Version="0.1.0-unstable0006" />
-    <PackageReference Include="Cogito.Extensions.Logging.Serilog.Autofac" Version="0.1.0-unstable0006" />
-    <PackageReference Include="Cogito.Serilog.Autofac" Version="0.1.0-unstable0002" />
+    <PackageReference Include="Cogito.Extensions.Logging.Autofac" Version="0.1.0-unstable0008" />
+    <PackageReference Include="Cogito.Extensions.Logging.Serilog.Autofac" Version="0.1.0-unstable0008" />
+    <PackageReference Include="Cogito.Serilog.Autofac" Version="0.1.0-unstable0003" />
     <PackageReference Include="Microsoft.AspNetCore" Version="2.1.2" />
   </ItemGroup>
 
