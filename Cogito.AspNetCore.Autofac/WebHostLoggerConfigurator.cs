@@ -3,16 +3,16 @@
 using Autofac;
 
 using Cogito.Autofac;
-using Cogito.Autofac.DependencyInjection;
 
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Cogito.AspNetCore.Autofac
 {
 
-    [RegisterAs(typeof(IServiceCollectionConfigurator))]
+    [RegisterAs(typeof(IWebHostBuilderConfigurator))]
     public class WebHostLoggerConfigurator :
-        IServiceCollectionConfigurator
+        IWebHostBuilderConfigurator
     {
 
         readonly IComponentContext context;
@@ -26,10 +26,9 @@ namespace Cogito.AspNetCore.Autofac
             this.context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public IServiceCollection Apply(IServiceCollection services)
+        public IWebHostBuilder Apply(IWebHostBuilder builder)
         {
-            services.AddSingleton(WebHostLogger.InterfaceType, ctx => context.Resolve(WebHostLogger.InterfaceType));
-            return services;
+            return builder.ConfigureServices(s => s.AddSingleton(WebHostLogger.InterfaceType, ctx => context.Resolve(WebHostLogger.InterfaceType)));
         }
 
     }
