@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Builder;
@@ -31,9 +30,9 @@ namespace Cogito.AspNetCore
         /// <param name="http"></param>
         /// <param name="name"></param>
         /// <returns></returns>
-        string[] GetHeaderValue(HttpContext http, string name)
+        string GetFirstHeaderValue(HttpContext http, string name)
         {
-            return http.Request.Headers.TryGetValue(name, out var v) ? v.ToArray() : null;
+            return http.Request.Headers.TryGetValue(name, out var v) && v.Count > 0 ? v[0] : null;
         }
 
         /// <summary>
@@ -41,9 +40,13 @@ namespace Cogito.AspNetCore
         /// </summary>
         /// <param name="http"></param>
         /// <returns></returns>
-        string GetOriginalUrl(HttpContext http)
+        string GetForwardedPath(HttpContext http)
         {
-            return GetHeaderValue(http, "X-Original-URL")?.FirstOrDefault();
+            var o = GetFirstHeaderValue(http, "X-Original-URL") ?? GetFirstHeaderValue(http, "X-Forwarded-Path");
+            if (o != null && Uri.TryCreate(o, UriKind.RelativeOrAbsolute, out var uri))
+                return uri.IsAbsoluteUri ? uri.AbsolutePath : uri.ToString();
+
+            return null;
         }
 
         /// <summary>
@@ -56,16 +59,12 @@ namespace Cogito.AspNetCore
             if (http == null)
                 throw new ArgumentNullException(nameof(http));
 
-            var url = GetOriginalUrl(http);
-            if (url != null)
+            var forwardedPath = new PathString(GetForwardedPath(http));
+            if (forwardedPath.HasValue)
             {
-                // extract X-Original-URL headers
-                var oUrl = new Uri(url, UriKind.RelativeOrAbsolute);
-                var rUrl = (PathString)(oUrl.IsAbsoluteUri ? oUrl.AbsolutePath : url);
-
                 // check that original URL ends with path, thus we know the remaining
                 // is our new base
-                if (rUrl.EndsWithSegments(http.Request.Path, out var newPathBase))
+                if (forwardedPath.EndsWithSegments(http.Request.PathBase + http.Request.Path, out var newPathBase))
                 {
                     // save away the original path for restoration
                     var path = http.Request.Path;

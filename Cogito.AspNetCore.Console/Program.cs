@@ -27,6 +27,7 @@ namespace Cogito.AspNetCore.Console
             using (var container = builder.Build())
             using (var hostScope = container.BeginLifetimeScope())
                 await WebHost.CreateDefaultBuilder(args)
+                    .UseReverseProxyRewrite()
                     .UseStartup<Startup>(hostScope)
                     .UseKestrel()
                     .BuildAndRunAsync();

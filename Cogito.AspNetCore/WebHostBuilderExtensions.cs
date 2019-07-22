@@ -21,7 +21,6 @@ namespace Cogito.AspNetCore
             if (builder == null)
                 throw new ArgumentNullException(nameof(builder));
 
-
             // check if UseReverseProxyRewrite was called already
             if (builder.GetSetting(nameof(UseReverseProxyRewrite)) != null)
                 return builder;
