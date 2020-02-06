@@ -45,6 +45,7 @@ namespace Cogito.AspNetCore.Console
         /// <param name="applicationLifetime"></param>
         public void Configure(IApplicationBuilder app, IApplicationLifetime applicationLifetime)
         {
+            app.Use((ctx, next) => next());
             applicationLifetime.ApplicationStopped.Register(() => scope.Dispose());
         }
 

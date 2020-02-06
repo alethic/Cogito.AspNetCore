@@ -5,11 +5,10 @@ using Cogito.Autofac;
 namespace Cogito.AspNetCore.Autofac
 {
 
-    public class AssemblyModule :
-        Module
+    public class AssemblyModule : ModuleBase
     {
 
-        protected override void Load(ContainerBuilder builder)
+        protected override void Register(ContainerBuilder builder)
         {
             builder.RegisterFromAttributes(typeof(AssemblyModule).Assembly);
             builder.RegisterType(WebHostLogger.ImplementationType).As(WebHostLogger.InterfaceType);
