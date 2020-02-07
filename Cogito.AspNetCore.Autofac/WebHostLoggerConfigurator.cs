@@ -28,7 +28,12 @@ namespace Cogito.AspNetCore.Autofac
 
         public IWebHostBuilder Apply(IWebHostBuilder builder)
         {
-            return builder.ConfigureServices(s => s.AddSingleton(WebHostLogger.InterfaceType, ctx => context.Resolve(WebHostLogger.InterfaceType)));
+            return builder.ConfigureServices(s =>
+            {
+#if !NETCOREAPP3_0
+                s.AddSingleton(WebHostLogger.InterfaceType, ctx => context.Resolve(WebHostLogger.InterfaceType));
+#endif
+            });
         }
 
     }
