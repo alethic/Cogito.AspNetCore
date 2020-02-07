@@ -34,7 +34,6 @@ namespace Cogito.AspNetCore.Console
         /// <param name="services"></param>
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.AddAuthenticationCore();
             return new AutofacServiceProvider(scope = parent.BeginLifetimeScope(builder => builder.Populate(services)));
         }
 

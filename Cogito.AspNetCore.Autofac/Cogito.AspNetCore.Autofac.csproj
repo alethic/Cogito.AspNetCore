@@ -1,17 +1,24 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
+        <TargetFrameworks>netstandard2.0;netcoreapp3.0</TargetFrameworks>
         <Description>Various utilities and extensions for working with Autofac and ASP.Net Core.</Description>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="Autofac" Version="5.0.0" />
-        <PackageReference Include="Cogito.Autofac" Version="2.0.2" />
-        <PackageReference Include="Cogito.Autofac.DependencyInjection" Version="2.0.2" />
+        <PackageReference Include="Cogito.Autofac" Version="2.0.6" />
+        <PackageReference Include="Cogito.Autofac.DependencyInjection" Version="2.0.6" />
+    </ItemGroup>
+
+    <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.0' ">
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    </ItemGroup>
+
+    <ItemGroup Condition=" '$(TargetFramework)' != 'netcoreapp3.0' ">
         <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.1" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="2.2.0" />
     </ItemGroup>
 
     <ItemGroup>
