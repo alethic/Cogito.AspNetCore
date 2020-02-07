@@ -1,24 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <Authors>Jerome Haltom</Authors>
-    <PackageProjectUrl>https://github.com/wasabii/Cogito.AspNetCore</PackageProjectUrl>
-    <PackageIconUrl>https://cloverluxussc.blob.core.windows.net/public/cogito-nuget-icon.png</PackageIconUrl>
-    <Description>Various utilities and extensions for working with Autofac and ASP.Net Core.</Description>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <Description>Various utilities and extensions for working with Autofac and ASP.Net Core.</Description>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Autofac" Version="5.0.0" />
-    <PackageReference Include="Cogito.Autofac" Version="2.0.2" />
-    <PackageReference Include="Cogito.Autofac.DependencyInjection" Version="2.0.2" />
-    <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.1" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Autofac" Version="5.0.0" />
+        <PackageReference Include="Cogito.Autofac" Version="2.0.2" />
+        <PackageReference Include="Cogito.Autofac.DependencyInjection" Version="2.0.2" />
+        <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.1" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Cogito.AspNetCore\Cogito.AspNetCore.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Cogito.AspNetCore\Cogito.AspNetCore.csproj" />
+    </ItemGroup>
 
 </Project>

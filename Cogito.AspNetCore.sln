@@ -1,11 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27825.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29721.120
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7271F8CF-C4EC-47FE-91F3-FF3331482C4F}"
 	ProjectSection(SolutionItems) = preProject
 		appveyor.yml = appveyor.yml
+		Directory.Build.props = Directory.Build.props
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cogito.AspNetCore", "Cogito.AspNetCore\Cogito.AspNetCore.csproj", "{223B412C-6AED-46CD-884B-E707BCD8963D}"
@@ -14,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cogito.AspNetCore.Tests", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cogito.AspNetCore.Autofac", "Cogito.AspNetCore.Autofac\Cogito.AspNetCore.Autofac.csproj", "{FF000FE1-02BE-46EA-838B-D111F42E6532}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cogito.AspNetCore.Console", "Cogito.AspNetCore.Console\Cogito.AspNetCore.Console.csproj", "{47BC7047-C0A9-4929-8538-D65D04FF17EF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cogito.AspNetCore.Console", "Cogito.AspNetCore.Console\Cogito.AspNetCore.Console.csproj", "{47BC7047-C0A9-4929-8538-D65D04FF17EF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
