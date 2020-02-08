@@ -1,12 +1,13 @@
 ﻿using System.Threading.Tasks;
 
 using Autofac;
-
+using Autofac.Extensions.DependencyInjection;
 using Cogito.AspNetCore.Autofac;
 using Cogito.Autofac;
 
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 
 namespace Cogito.AspNetCore.Console
 {
@@ -26,11 +27,13 @@ namespace Cogito.AspNetCore.Console
 
             using (var container = builder.Build())
             using (var hostScope = container.BeginLifetimeScope())
-                await WebHost.CreateDefaultBuilder(args)
-                    .UseReverseProxyRewrite()
-                    .UseStartup<Startup>(hostScope)
-                    .UseKestrel()
-                    .BuildAndRunAsync();
+                await Host.CreateDefaultBuilder(args)
+                    .UseServiceProviderFactory(new AutofacChildLifetimeScopeServiceProviderFactory(hostScope))
+                    .ConfigureWebHost(w => w
+                        .UseReverseProxyRewrite()
+                        .UseStartup<Startup>()
+                        .UseKestrel())
+                    .RunConsoleAsync();
         }
 
     }

@@ -7,7 +7,7 @@ namespace Cogito.AspNetCore.Autofac
 
 #if !NETCOREAPP3_0
 
-    public static class WebHostLogger
+    static class WebHostLogger
     {
 
         /// <summary>
