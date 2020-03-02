@@ -7,7 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Autofac" Version="5.1.2" />
         <PackageReference Include="Cogito.Autofac" Version="2.2.5" />
         <PackageReference Include="Cogito.Autofac.DependencyInjection" Version="2.2.5" />
     </ItemGroup>
