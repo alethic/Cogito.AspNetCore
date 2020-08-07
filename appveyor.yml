@@ -21,7 +21,7 @@ build:
 
 artifacts:
   - path: pkg\*.nupkg
-    name: Cogito.AspNetCore
+    name: Cogito.
 
 deploy:
   provider: NuGet
