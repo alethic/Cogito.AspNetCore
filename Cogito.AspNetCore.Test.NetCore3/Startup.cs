@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Autofac.Extensions.DependencyInjection;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,7 +16,7 @@ namespace Cogito.AspNetCore.Test.NetCore3
 
         }
 
-        public void ConfigureContainer(ContainerBuilder builder)
+        public void ConfigureContainer(AutofacChildLifetimeScopeConfigurationAdapter builder)
         {
 
         }

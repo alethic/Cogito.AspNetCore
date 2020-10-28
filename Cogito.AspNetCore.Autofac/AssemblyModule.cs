@@ -12,11 +12,6 @@ namespace Cogito.AspNetCore.Autofac
         {
             builder.RegisterModule<Cogito.Extensions.Logging.Autofac.AssemblyModule>();
             builder.RegisterFromAttributes(typeof(AssemblyModule).Assembly);
-
-#if !NETCOREAPP3_0
-            // ASP.Net Core 2.0's WebHost implementation uses an internal logger type
-            builder.RegisterType(WebHostLogger.ImplementationType).As(WebHostLogger.InterfaceType);
-#endif
         }
 
     }
