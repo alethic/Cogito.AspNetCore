@@ -9,6 +9,7 @@
     <ItemGroup>
         <PackageReference Include="Cogito.Autofac" Version="3.0.2" />
         <PackageReference Include="Cogito.Autofac.DependencyInjection" Version="3.0.2" />
+        <PackageReference Include="Cogito.Extensions.Logging.Autofac" Version="2.0.14" />
     </ItemGroup>
 
     <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.0' ">

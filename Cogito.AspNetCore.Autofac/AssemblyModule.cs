@@ -10,6 +10,7 @@ namespace Cogito.AspNetCore.Autofac
 
         protected override void Register(ContainerBuilder builder)
         {
+            builder.RegisterModule<Cogito.Extensions.Logging.Autofac.AssemblyModule>();
             builder.RegisterFromAttributes(typeof(AssemblyModule).Assembly);
 
 #if !NETCOREAPP3_0
