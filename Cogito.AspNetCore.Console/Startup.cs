@@ -1,11 +1,8 @@
-﻿
-using Autofac.Extensions.DependencyInjection;
-using Cogito.Autofac;
+﻿using Cogito.Autofac;
 
 using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Hosting;
 
-namespace Cogito.AspNetCore.Console
+namespace Cogito.AspNetCore.Test.NetCore2
 {
 
     [RegisterAs(typeof(Startup))]
@@ -17,7 +14,7 @@ namespace Cogito.AspNetCore.Console
         /// </summary>
         /// <param name="app"></param>
         /// <param name="lifetime"></param>
-        public void Configure(IApplicationBuilder app, IHostApplicationLifetime lifetime)
+        public void Configure(IApplicationBuilder app)
         {
             app.Use((ctx, next) => next());
         }

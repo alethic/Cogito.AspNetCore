@@ -1,67 +1,39 @@
 ﻿using System;
-using System.Linq;
 
 using Autofac;
 
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Cogito.AspNetCore.Autofac
 {
 
+    /// <summary>
+    /// Provides extension methods for the <see cref="IWebHostBuilder"/>.
+    /// </summary>
     public static class WebHostBuilderExtensions
     {
 
-        const string CONFIGURED_FLAG = "Cogito.AspNetCore.Autofac:Configured";
-
         /// <summary>
-        /// Configures the <see cref="IWebHostBuilder"/> to use the given <see cref="ILifetimeScope"/> for resolution.
+        /// Registers the Autofac container with the <see cref="IWebHostBuilder"/>. Not required for ASP.Net Core 3 nor the generic host.
         /// </summary>
         /// <param name="builder"></param>
-        /// <param name="context"></param>
+        /// <param name="configure"></param>
         /// <returns></returns>
-        public static IWebHostBuilder UseComponentContext(this IWebHostBuilder builder, IComponentContext context)
+        public static IWebHostBuilder UseAutofac(this IWebHostBuilder builder, Action<ContainerBuilder> configure = null)
         {
-            if (builder == null)
-                throw new ArgumentNullException(nameof(builder));
-            if (context == null)
-                throw new ArgumentNullException(nameof(context));
-
-            // prevent double configuration
-            if (!bool.TryParse(builder.GetSetting(CONFIGURED_FLAG), out var value) || !value)
-            {
-                // apply any registered configuration
-                foreach (var i in context.Resolve<IOrderedEnumerable<IWebHostBuilderConfiguratorProvider>>())
-                    foreach (var j in i.GetConfigurators())
-                        builder = j.Apply(builder);
-
-                // to prevent double configuration
-                builder.UseSetting(CONFIGURED_FLAG, true.ToString());
-            }
-
-            return builder;
+            return builder.ConfigureServices(s => s.AddAutofac(configure));
         }
 
         /// <summary>
-        /// Configures the <see cref="IWebHostBuilder"/> to use the given <see cref="ILifetimeScope"/> for resolution,
-        /// and to resolve the specified <typeparamref name="TStartup"/> instance from that scope.
+        /// Registers the Autofac container with the <see cref="IWebHostBuilder"/>. Not required for ASP.Net Core 3 nor the generic host.
         /// </summary>
-        /// <typeparam name="TStartup"></typeparam>
         /// <param name="builder"></param>
         /// <param name="scope"></param>
+        /// <param name="configure"></param>
         /// <returns></returns>
-        public static IWebHostBuilder UseStartup<TStartup>(this IWebHostBuilder builder, ILifetimeScope scope)
-            where TStartup : class
+        public static IWebHostBuilder UseAutofac(this IWebHostBuilder builder, ILifetimeScope scope, Action<ContainerBuilder> configure = null)
         {
-            if (builder == null)
-                throw new ArgumentNullException(nameof(builder));
-            if (scope == null)
-                throw new ArgumentNullException(nameof(scope));
-
-            return builder
-                .UseComponentContext(scope)
-                .ConfigureServices(s => s.AddTransient(provider => scope.Resolve<TStartup>()))
-                .UseStartup<TStartup>();
+            return builder.ConfigureServices(s => s.AddAutofac(scope, configure));
         }
 
     }
