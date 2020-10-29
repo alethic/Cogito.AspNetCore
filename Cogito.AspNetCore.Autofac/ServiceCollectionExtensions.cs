@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
@@ -50,8 +51,42 @@ namespace Cogito.AspNetCore.Autofac
         /// <returns></returns>
         static IServiceCollection AddAutofac<TContainerBuilder>(this IServiceCollection services, Func<IServiceProviderFactory<TContainerBuilder>> func)
         {
-            services.AddSingleton(func());
+            var d = services.FirstOrDefault(i => i.ServiceType == typeof(IServiceProviderFactory<IServiceCollection>));
+            if (d != null)
+                services.Remove(d);
+
+            services.AddSingleton(ctx => func());
+            services.AddSingleton<IServiceProviderFactory<IServiceCollection>>(ctx => new AutofacHostingServiceProviderFactory(services => ctx.GetRequiredService<IServiceProviderFactory<TContainerBuilder>>().CreateServiceProvider(ctx.GetRequiredService<IServiceProviderFactory<TContainerBuilder>>().CreateBuilder(services))));
             return services;
+        }
+
+        /// <summary>
+        /// Provides an implementation of <see cref="IServiceProviderFactory{IServiceCollection}"/> for the Web Host to use internally.
+        /// </summary>
+        class AutofacHostingServiceProviderFactory : IServiceProviderFactory<IServiceCollection>
+        {
+
+            readonly Func<IServiceCollection, IServiceProvider> factory;
+
+            /// <summary>
+            /// Initializes a new instances.
+            /// </summary>
+            /// <param name="factory"></param>
+            public AutofacHostingServiceProviderFactory(Func<IServiceCollection, IServiceProvider> factory)
+            {
+                this.factory = factory ?? throw new ArgumentNullException(nameof(factory));
+            }
+
+            public IServiceCollection CreateBuilder(IServiceCollection services)
+            {
+                return services;
+            }
+
+            public IServiceProvider CreateServiceProvider(IServiceCollection containerBuilder)
+            {
+                return factory(containerBuilder);
+            }
+
         }
 
     }

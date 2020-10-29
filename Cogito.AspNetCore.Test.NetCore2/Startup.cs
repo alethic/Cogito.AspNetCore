@@ -30,6 +30,7 @@ namespace Cogito.AspNetCore.Test.NetCore2
         {
             app.Use(async (ctx, next) =>
             {
+                var s = ctx.RequestServices.GetRequiredService<ILifetimeScope>();
                 var l = ctx.RequestServices.GetRequiredService<ILogger>();
                 l.LogInformation("request");
                 await next();
