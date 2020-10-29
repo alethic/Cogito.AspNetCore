@@ -56,8 +56,20 @@ namespace Cogito.AspNetCore.Autofac
                 services.Remove(d);
 
             services.AddSingleton(ctx => func());
-            services.AddSingleton<IServiceProviderFactory<IServiceCollection>>(ctx => new AutofacHostingServiceProviderFactory(services => ctx.GetRequiredService<IServiceProviderFactory<TContainerBuilder>>().CreateServiceProvider(ctx.GetRequiredService<IServiceProviderFactory<TContainerBuilder>>().CreateBuilder(services))));
+            services.AddSingleton(CreateHostingServiceProviderFactory<TContainerBuilder>);
             return services;
+        }
+
+        /// <summary>
+        /// Creates a <see cref="IServiceProviderFactory{IServiceCollection}"/> that can function as the hosting container.
+        /// </summary>
+        /// <typeparam name="TContainerBuilder"></typeparam>
+        /// <param name="provider"></param>
+        /// <returns></returns>
+        static IServiceProviderFactory<IServiceCollection> CreateHostingServiceProviderFactory<TContainerBuilder>(IServiceProvider provider)
+        {
+            var builder = provider.GetRequiredService<IServiceProviderFactory<TContainerBuilder>>();
+            return new AutofacHostingServiceProviderFactory(services => builder.CreateServiceProvider(builder.CreateBuilder(services)));
         }
 
         /// <summary>
