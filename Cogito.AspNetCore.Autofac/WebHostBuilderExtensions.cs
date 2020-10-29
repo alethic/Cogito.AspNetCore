@@ -2,6 +2,8 @@
 
 using Autofac;
 
+using Cogito.Autofac.DependencyInjection;
+
 using Microsoft.AspNetCore.Hosting;
 
 namespace Cogito.AspNetCore.Autofac
@@ -14,26 +16,26 @@ namespace Cogito.AspNetCore.Autofac
     {
 
         /// <summary>
-        /// Registers the Autofac container with the <see cref="IWebHostBuilder"/>. Not required for ASP.Net Core 3 nor the generic host.
+        /// Registers the Autofac container with the <see cref="IWebHostBuilder"/>. Not required for the generic host.
         /// </summary>
         /// <param name="builder"></param>
-        /// <param name="configure"></param>
+        /// <param name="configureAction"></param>
         /// <returns></returns>
-        public static IWebHostBuilder UseAutofac(this IWebHostBuilder builder, Action<ContainerBuilder> configure = null)
+        public static IWebHostBuilder UseAutofac(this IWebHostBuilder builder, Action<ContainerBuilder> configureAction = null)
         {
-            return builder.ConfigureServices(s => s.AddAutofac(configure));
+            return builder.ConfigureServices(s => s.AddAutofac(configureAction));
         }
 
         /// <summary>
-        /// Registers the Autofac container with the <see cref="IWebHostBuilder"/>. Not required for ASP.Net Core 3 nor the generic host.
+        /// Registers the Autofac container with the <see cref="IWebHostBuilder"/>. Not required for the generic host.
         /// </summary>
         /// <param name="builder"></param>
         /// <param name="scope"></param>
-        /// <param name="configure"></param>
+        /// <param name="configureAction"></param>
         /// <returns></returns>
-        public static IWebHostBuilder UseAutofac(this IWebHostBuilder builder, ILifetimeScope scope, Action<ContainerBuilder> configure = null)
+        public static IWebHostBuilder UseAutofac(this IWebHostBuilder builder, ILifetimeScope scope, Action<ContainerBuilder> configureAction = null)
         {
-            return builder.ConfigureServices(s => s.AddAutofac(scope, configure));
+            return builder.ConfigureServices(s => s.AddAutofac(scope, configureAction));
         }
 
     }
