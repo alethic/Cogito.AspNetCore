@@ -12,6 +12,7 @@
       }
     ],
     "configProperties": {
+      "MSTest.EnableParentProcessQuery": true,
       "System.Reflection.Metadata.MetadataUpdater.IsSupported": false,
       "System.Runtime.Serialization.EnableUnsafeBinaryFormatterSerialization": false
     }
