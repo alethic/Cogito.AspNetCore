@@ -6,8 +6,8 @@
 
     <ItemGroup>
         <PackageReference Include="Autofac" Version="9.3.2" />
-        <PackageReference Include="Cogito.Extensions.Logging.Serilog.Autofac" Version="2.0.20" />
-        <PackageReference Include="Cogito.Serilog.Autofac" Version="2.0.17" />
+        <PackageReference Include="Cogito.Extensions.Logging.Serilog.Autofac" Version="3.0.3" />
+        <PackageReference Include="Cogito.Serilog.Autofac" Version="4.0.3" />
         <PackageReference Include="Microsoft.AspNetCore.All" Version="2.2.8" />
     </ItemGroup>
 
